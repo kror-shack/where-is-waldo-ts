@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import uniqid from "uniqid";
+import GamePage from "./components/GamePage";
+import StartPage from "./components/StartPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LeaderBoard from "./components/LeaderBoard";
+
+interface User {
+  userName: string;
+  timeTaken: number;
+}
 
 function App() {
+  const [user, setUser] = useState<User>({
+    userName: `Guest-User#${uniqid()}`,
+    timeTaken: 0,
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<StartPage user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/game-page"
+            element={<GamePage user={user} setUser={setUser} />}
+          />
+          <Route path="/leaderboard" element={<LeaderBoard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,0 +1,18 @@
+.Timer {
+  display: flex;
+  height: 50px;
+  font-size: 25px;
+  font-family: monospace;
+  align-items: center;
+  justify-content: center;
+
+  .display {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .display > p {
+    color: red;
+    margin: 0;
+  }
+}
